@@ -2,5 +2,5 @@
   <Project Path="Datos/Datos.csproj" />
   <Project Path="Entidades/Entidades.csproj" />
   <Project Path="Negocio/Negocio.csproj" />
-  <Project Path="TPI_GRUPO_8/TPI_GRUPO_8.csproj" />
+  <Project Path="TPINT_GRUPO_8_PR3/TPINT_GRUPO_8_PR3.csproj" />
 </Solution>

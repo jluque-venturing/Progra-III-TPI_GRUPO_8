@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TPI_GRUPO_8</RootNamespace>
-    <AssemblyName>TPI_GRUPO_8</AssemblyName>
+    <RootNamespace>TPINT_GRUPO_8_PR3</RootNamespace>
+    <AssemblyName>TPINT_GRUPO_8_PR3</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
