@@ -102,3 +102,48 @@ UNION SELECT 'ESP00018', N'Otorrinolaringología'
 UNION SELECT 'ESP00019', N'Diabetología'
 UNION SELECT 'ESP00020', N'Infectología';
 GO
+
+USE clinica
+GO
+
+CREATE TABLE Administradores
+(
+	IdAdministrador CHAR(8) NOT NULL,
+	Usuario VARCHAR(30) NOT NULL,
+	Clave VARCHAR(30) NOT NULL,
+	Nombre VARCHAR(50) NOT NULL,
+	Apellido VARCHAR(50) NOT NULL,
+
+	CONSTRAINT PK_Administradores PRIMARY KEY (IdAdministrador),
+	CONSTRAINT UQ_Administradores_Usuario UNIQUE (Usuario)
+);
+GO
+
+CREATE TABLE Pacientes
+(
+	IdPaciente CHAR(8) NOT NULL,
+	Dni CHAR(15) NOT NULL,
+	Nombre VARCHAR(50) NOT NULL,
+	Apellido VARCHAR(50) NOT NULL,
+	Sexo CHAR(1) NOT NULL,
+	Nacionalidad VARCHAR(50) NOT NULL,
+	FechaNacimiento DATE NOT NULL,
+	Direccion VARCHAR(100) NOT NULL,
+	Email VARCHAR(100) NOT NULL,
+	Telefono VARCHAR(20) NOT NULL,
+	IdLocalidad CHAR(8) NOT NULL,
+	Activo BIT NOT NULL DEFAULT 1,
+
+	CONSTRAINT PK_Pacientes PRIMARY KEY (IdPaciente),
+	CONSTRAINT UQ_Pacientes_Dni UNIQUE (Dni),
+
+	CONSTRAINT FK_Pacientes_Localidades FOREIGN KEY (IdLocalidad)
+		REFERENCES Localidades (IdLocalidad),
+
+	CONSTRAINT CK_Pacientes_Sexo CHECK (Sexo IN ('M', 'F'))
+);
+GO
+
+INSERT INTO Administradores (IdAdministrador, Usuario, Clave, Nombre, Apellido)
+SELECT 'ADM00001', N'admin', N'admin123', N'Administrador', N'Principal';
+GO
