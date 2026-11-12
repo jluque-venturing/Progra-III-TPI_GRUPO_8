@@ -147,3 +147,64 @@ GO
 INSERT INTO Administradores (IdAdministrador, Usuario, Clave, Nombre, Apellido)
 SELECT 'ADM00001', N'admin', N'admin123', N'Administrador', N'Principal';
 GO
+
+USE clinica
+GO
+
+CREATE TABLE Medicos
+(
+	Legajo CHAR(8) NOT NULL,
+	Dni CHAR(15) NOT NULL,
+	Nombre VARCHAR(50) NOT NULL,
+	Apellido VARCHAR(50) NOT NULL,
+	Sexo CHAR(1) NOT NULL,
+	Nacionalidad VARCHAR(50) NOT NULL,
+	FechaNacimiento DATE NOT NULL,
+	Direccion VARCHAR(100) NOT NULL,
+	Email VARCHAR(100) NOT NULL,
+	Telefono VARCHAR(20) NOT NULL,
+	IdLocalidad CHAR(8) NOT NULL,
+	IdEspecialidad CHAR(8) NOT NULL,
+	Usuario VARCHAR(30) NULL,
+	Clave VARCHAR(30) NULL,
+	Activo BIT NOT NULL DEFAULT 1,
+
+	CONSTRAINT PK_Medicos PRIMARY KEY (Legajo),
+	CONSTRAINT UQ_Medicos_Dni UNIQUE (Dni),
+
+	CONSTRAINT FK_Medicos_Localidades FOREIGN KEY (IdLocalidad)
+		REFERENCES Localidades (IdLocalidad),
+
+	CONSTRAINT FK_Medicos_Especialidades FOREIGN KEY (IdEspecialidad)
+		REFERENCES Especialidades (IdEspecialidad),
+
+	CONSTRAINT CK_Medicos_Sexo CHECK (Sexo IN ('M', 'F'))
+);
+GO
+
+-- El índice filtrado exige QUOTED_IDENTIFIER ON (SSMS lo trae así, sqlcmd no)
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- UNIQUE común admite un solo NULL; el filtrado deja muchos médicos sin usuario
+CREATE UNIQUE INDEX UQ_Medicos_Usuario ON Medicos (Usuario)
+	WHERE Usuario IS NOT NULL;
+GO
+
+-- DiaSemana: 1 = lunes ... 7 = domingo
+CREATE TABLE HorariosMedico
+(
+	Legajo CHAR(8) NOT NULL,
+	DiaSemana TINYINT NOT NULL,
+	HoraInicio TINYINT NOT NULL,
+	HoraFin TINYINT NOT NULL,
+
+	CONSTRAINT PK_HorariosMedico PRIMARY KEY (Legajo, DiaSemana),
+
+	CONSTRAINT FK_HorariosMedico_Medicos FOREIGN KEY (Legajo)
+		REFERENCES Medicos (Legajo),
+
+	CONSTRAINT CK_HorariosMedico_Dia CHECK (DiaSemana BETWEEN 1 AND 7),
+	CONSTRAINT CK_HorariosMedico_Horas CHECK (HoraInicio < HoraFin AND HoraFin <= 24)
+);
+GO
