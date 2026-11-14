@@ -1,6 +1,6 @@
 USE clinica
 
-CREATE TABLE turnos 
+CREATE TABLE Turnos 
 (
 IdTurno CHAR(8) NOT NULL,
 Legajo CHAR(8) NOT NULL,
