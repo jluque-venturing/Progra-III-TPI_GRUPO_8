@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +12,28 @@ namespace TPINT_GRUPO_8_PR3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                cargarGvTurnos();
+            }
+        }
+        protected void gvTurnos_PageIndexChanging(object sender, GridViewCommandEventArgs e)
+        {
+            
+        }
+
+        private void cargarGvTurnos()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("IdTurno");
+            dt.Columns.Add("Especialidad");
+            dt.Columns.Add("Medico");
+            dt.Columns.Add("Paciente");
+            dt.Columns.Add("Fecha");
+            dt.Columns.Add("Horario");
+
+            gvTurnos.DataSource = dt;
+            gvTurnos.DataBind();
 
         }
     }

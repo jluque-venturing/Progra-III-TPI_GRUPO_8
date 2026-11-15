@@ -253,7 +253,13 @@
                 <td>
                     <asp:GridView ID="gvTurnos" runat="server"
                         AutoGenerateColumns="False"
-                        EmptyDataText="No hay turnos para mostrar">
+                        ShowHeaderWhenEmpty="true"
+                        EmptyDataText="No hay turnos para mostrar"
+                        AllowPaging="True"
+                        PageSize="10">
+                        
+                      
+
 
                         <Columns>
 
