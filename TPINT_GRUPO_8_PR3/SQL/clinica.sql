@@ -208,3 +208,226 @@ CREATE TABLE HorariosMedico
 	CONSTRAINT CK_HorariosMedico_Horas CHECK (HoraInicio < HoraFin AND HoraFin <= 24)
 );
 GO
+
+-- Procedimiento almacenado: Medicos y Usuarios. 
+
+USE clinica
+GO
+
+CREATE OR ALTER PROCEDURE spAgregarMedico
+    @Legajo CHAR(8),
+    @Dni CHAR(15),
+    @Nombre VARCHAR(50),
+    @Apellido VARCHAR(50),
+    @Sexo CHAR(1),
+    @Nacionalidad VARCHAR(50),
+    @FechaNacimiento DATE,
+    @Direccion VARCHAR(100),
+    @Email VARCHAR(100),
+    @Telefono VARCHAR(20),
+    @IdLocalidad CHAR(8),
+    @IdEspecialidad CHAR(8),
+    @Usuario VARCHAR(30) = NULL,
+    @Clave VARCHAR(30) = NULL
+AS
+BEGIN
+    INSERT INTO Medicos
+    (
+        Legajo,
+        Dni,
+        Nombre,
+        Apellido,
+        Sexo,
+        Nacionalidad,
+        FechaNacimiento,
+        Direccion,
+        Email,
+        Telefono,
+        IdLocalidad,
+        IdEspecialidad,
+        Usuario,
+        Clave
+    )
+    SELECT
+        @Legajo,
+        @Dni,
+        @Nombre,
+        @Apellido,
+        @Sexo,
+        @Nacionalidad,
+        @FechaNacimiento,
+        @Direccion,
+        @Email,
+        @Telefono,
+        @IdLocalidad,
+        @IdEspecialidad,
+        @Usuario,
+        @Clave
+END
+GO
+
+CREATE OR ALTER PROCEDURE spModificarMedico
+    @Legajo CHAR(8),
+    @Dni CHAR(15),
+    @Nombre VARCHAR(50),
+    @Apellido VARCHAR(50),
+    @Sexo CHAR(1),
+    @Nacionalidad VARCHAR(50),
+    @FechaNacimiento DATE,
+    @Direccion VARCHAR(100),
+    @Email VARCHAR(100),
+    @Telefono VARCHAR(20),
+    @IdLocalidad CHAR(8),
+    @IdEspecialidad CHAR(8)
+AS
+BEGIN
+    UPDATE Medicos
+    SET
+        Dni = @Dni,
+        Nombre = @Nombre,
+        Apellido = @Apellido,
+        Sexo = @Sexo,
+        Nacionalidad = @Nacionalidad,
+        FechaNacimiento = @FechaNacimiento,
+        Direccion = @Direccion,
+        Email = @Email,
+        Telefono = @Telefono,
+        IdLocalidad = @IdLocalidad,
+        IdEspecialidad = @IdEspecialidad
+    WHERE Legajo = @Legajo
+END
+GO
+
+CREATE OR ALTER PROCEDURE spModificarUsuario
+    @Legajo CHAR(8),
+    @Usuario VARCHAR(30),
+    @Clave VARCHAR(30)
+AS
+BEGIN
+    UPDATE Medicos
+    SET
+        Usuario = @Usuario,
+        Clave = @Clave
+    WHERE Legajo = @Legajo
+END
+GO
+
+CREATE OR ALTER PROCEDURE spBajaMedico
+    @Legajo CHAR(8)
+AS
+BEGIN
+    UPDATE Medicos
+    SET Activo = 0
+    WHERE Legajo = @Legajo
+END
+GO
+
+CREATE OR ALTER PROCEDURE spAgregarHorario
+    @Legajo CHAR(8),
+    @DiaSemana TINYINT,
+    @HoraInicio TINYINT,
+    @HoraFin TINYINT
+AS
+BEGIN
+    INSERT INTO HorariosMedico
+    (
+        Legajo,
+        DiaSemana,
+        HoraInicio,
+        HoraFin
+    )
+    SELECT
+        @Legajo,
+        @DiaSemana,
+        @HoraInicio,
+        @HoraFin
+END
+GO
+
+USE clinica
+GO
+
+EXEC spAgregarMedico
+    @Legajo = 'MED99998',
+    @Dni = '99999998',
+    @Nombre = 'Carlos',
+    @Apellido = 'Prueba',
+    @Sexo = 'M',
+    @Nacionalidad = 'Argentina',
+    @FechaNacimiento = '1990-05-15',
+    @Direccion = 'Calle Falsa 123',
+    @Email = 'carlos.prueba98@gmail.com',
+    @Telefono = '1122334455',
+    @IdLocalidad = 'LOC00001',
+    @IdEspecialidad = 'ESP00001',
+    @Usuario = 'cprueba98',
+    @Clave = 'prueba123'
+GO
+
+SELECT *
+FROM Medicos
+WHERE Legajo = 'MED99998'
+GO
+
+EXEC spModificarMedico
+    @Legajo = 'MED99998',
+    @Dni = '99999998',
+    @Nombre = 'Carlos Alberto',
+    @Apellido = 'Gonzalez',
+    @Sexo = 'M',
+    @Nacionalidad = 'Argentina',
+    @FechaNacimiento = '1990-05-15',
+    @Direccion = 'Av. Rivadavia 1500',
+    @Email = 'carlos.alberto98@gmail.com',
+    @Telefono = '1144556677',
+    @IdLocalidad = 'LOC00002',
+    @IdEspecialidad = 'ESP00002'
+GO
+
+SELECT *
+FROM Medicos
+WHERE Legajo = 'MED99998'
+GO
+
+EXEC spModificarUsuario
+    @Legajo = 'MED99998',
+    @Usuario = 'carlosgonzalez98',
+    @Clave = 'clave456'
+GO
+
+SELECT
+    Legajo,
+    Nombre,
+    Apellido,
+    Usuario,
+    Clave
+FROM Medicos
+WHERE Legajo = 'MED99998'
+GO
+
+EXEC spBajaMedico
+    @Legajo = 'MED99998'
+GO
+
+SELECT
+    Legajo,
+    Nombre,
+    Apellido,
+    Activo
+FROM Medicos
+WHERE Legajo = 'MED99998'
+GO
+
+SELECT
+    name AS Procedimiento
+FROM sys.procedures
+WHERE name IN
+(
+    'spAgregarMedico',
+    'spModificarMedico',
+    'spModificarUsuario',
+    'spBajaMedico',
+    'spAgregarHorario'
+)
+ORDER BY name
+GO
