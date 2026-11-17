@@ -195,20 +195,19 @@ CREATE TABLE MedicoHorarios
 (
 	IdMedicoHorario CHAR(8) NOT NULL,
 	Legajo CHAR(8) NOT NULL,
-	DiaSemana VARCHAR(10) NOT NULL,
-	HoraInicio TIME(0) NOT NULL,
-	HoraFin TIME(0) NOT NULL,
+	Dia VARCHAR(10) NOT NULL,
+	HoraDesde TIME(0) NOT NULL,
+	HoraHasta TIME(0) NOT NULL,
 
 	CONSTRAINT PK_MedicoHorarios PRIMARY KEY (IdMedicoHorario),
-	CONSTRAINT UQ_MedicoHorarios_Legajo_Dia UNIQUE (Legajo, DiaSemana),
 
 	CONSTRAINT FK_MedicoHorarios_Medicos FOREIGN KEY (Legajo)
 		REFERENCES Medicos (Legajo),
 
-	CONSTRAINT CK_MedicoHorarios_Dia CHECK
-		(DiaSemana IN ('lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo')),
+	CONSTRAINT CK_MedicoHorarios_Dia CHECK (Dia IN
+		('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo')),
 
-	CONSTRAINT CK_MedicoHorarios_Horas CHECK (HoraInicio < HoraFin)
+	CONSTRAINT CK_MedicoHorarios_Horas CHECK (HoraHasta > HoraDesde)
 );
 GO
 
@@ -258,7 +257,7 @@ BEGIN
 	INSERT INTO Pacientes
 		(IdPaciente, Dni, Nombre, Apellido, Sexo, Nacionalidad, FechaNacimiento, Direccion, Email, Telefono, IdLocalidad)
 	VALUES
-		(@IdPaciente, @Dni, @Nombre, @Apellido, @Sexo, @Nacionalidad, @FechaNacimiento, @Direccion, @Email, @Telefono, @IdLocalidad);
+		(@IdMedicoHorario, @Legajo, @Dia, @HoraDesde, @HoraHasta);
 END
 GO
 
@@ -377,18 +376,18 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE spAgregarHorario
+CREATE PROCEDURE spAgregarHorario
 	@IdMedicoHorario CHAR(8),
 	@Legajo CHAR(8),
-	@DiaSemana VARCHAR(10),
-	@HoraInicio TIME(0),
-	@HoraFin TIME(0)
+	@Dia VARCHAR(10),
+	@HoraDesde TIME(0),
+	@HoraHasta TIME(0)
 AS
 BEGIN
 	INSERT INTO MedicoHorarios
-		(IdMedicoHorario, Legajo, DiaSemana, HoraInicio, HoraFin)
+		(IdMedicoHorario, Legajo, Dia, HoraDesde, HoraHasta)
 	VALUES
-		(@IdMedicoHorario, @Legajo, @DiaSemana, @HoraInicio, @HoraFin);
+		(@IdMedicoHorario, @Legajo, @Dia, @HoraDesde, @HoraHasta);
 END
 GO
 
