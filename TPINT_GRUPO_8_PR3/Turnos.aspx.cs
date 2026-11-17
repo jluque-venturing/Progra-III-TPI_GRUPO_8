@@ -17,9 +17,10 @@ namespace TPINT_GRUPO_8_PR3
                 cargarGvTurnos();
             }
         }
-        protected void gvTurnos_PageIndexChanging(object sender, GridViewCommandEventArgs e)
+        protected void gvTurnos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            
+            gvTurnos.PageIndex = e.NewPageIndex;
+            cargarGvTurnos();
         }
 
         private void cargarGvTurnos()
@@ -34,7 +35,6 @@ namespace TPINT_GRUPO_8_PR3
 
             gvTurnos.DataSource = dt;
             gvTurnos.DataBind();
-
         }
     }
 }

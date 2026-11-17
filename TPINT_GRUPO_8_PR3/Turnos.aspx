@@ -256,10 +256,8 @@
                         ShowHeaderWhenEmpty="true"
                         EmptyDataText="No hay turnos para mostrar"
                         AllowPaging="True"
-                        PageSize="10">
-                        
-                      
-
+                        PageSize="10"
+                        OnPageIndexChanging="gvTurnos_PageIndexChanging">
 
                         <Columns>
 

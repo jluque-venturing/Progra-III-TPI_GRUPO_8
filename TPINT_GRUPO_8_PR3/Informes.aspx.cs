@@ -43,8 +43,6 @@ namespace TPINT_GRUPO_8_PR3
                 return;
             }
 
-            // Alcance del aporte 8: pantalla y controles para mostrar informes.
-            // Queda pendiente vincular los cálculos y las tablas a la capa de datos.
             lblMensaje.Text = "Período seleccionado. Falta conectar los informes con los datos de la clínica.";
         }
     }
