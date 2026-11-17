@@ -10,7 +10,7 @@ namespace TPINT_GRUPO_8_PR3
         {
             if (!IsPostBack)
             {
-                // Deja visibles los GridView sin inventar registros.
+
                 gvPresentes.DataSource = new DataTable();
                 gvPresentes.DataBind();
 
