@@ -191,21 +191,24 @@ CREATE UNIQUE INDEX UQ_Medicos_Usuario ON Medicos (Usuario)
 	WHERE Usuario IS NOT NULL;
 GO
 
--- DiaSemana: 1 = lunes ... 7 = domingo
-CREATE TABLE HorariosMedico
+-- Tabla a confirmar con Dai
+CREATE TABLE MedicoHorarios
 (
-	Legajo CHAR(8) NOT NULL,
-	DiaSemana TINYINT NOT NULL,
-	HoraInicio TINYINT NOT NULL,
-	HoraFin TINYINT NOT NULL,
+    IdMedicoHorario CHAR(8) NOT NULL,
+    Legajo CHAR(8) NOT NULL,
+    DiaSemana VARCHAR(10) NOT NULL,
+    HoraInicio TIME(0) NOT NULL,
+    HoraFin TIME(0) NOT NULL,
 
-	CONSTRAINT PK_HorariosMedico PRIMARY KEY (Legajo, DiaSemana),
+    CONSTRAINT PK_MedicoHorarios PRIMARY KEY (IdMedicoHorario),
 
-	CONSTRAINT FK_HorariosMedico_Medicos FOREIGN KEY (Legajo)
-		REFERENCES Medicos (Legajo),
+    CONSTRAINT FK_MedicoHorarios_Medicos FOREIGN KEY (Legajo)
+        REFERENCES Medicos (Legajo),
 
-	CONSTRAINT CK_HorariosMedico_Dia CHECK (DiaSemana BETWEEN 1 AND 7),
-	CONSTRAINT CK_HorariosMedico_Horas CHECK (HoraInicio < HoraFin AND HoraFin <= 24)
+    CONSTRAINT CK_MedicoHorarios_Dia CHECK
+        (DiaSemana IN ('lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo')),
+
+    CONSTRAINT CK_MedicoHorarios_Horas CHECK (HoraInicio < HoraFin)
 );
 GO
 --Procedimiento almacenado de pacientes
@@ -269,6 +272,32 @@ BEGIN
 END
 GO
 
+
+USE clinica
+
+CREATE TABLE Turnos 
+(
+IdTurno CHAR(8) NOT NULL,
+Legajo CHAR(8) NOT NULL,
+IdPaciente CHAR(8) NOT NULL, 
+Fecha DATE NOT NULL, 
+Hora TIME(0) NOT NULL,
+Estado VARCHAR(500) NOT NULL,
+Activo BIT NOT NULL DEFAULT 1,
+
+CONSTRAINT PK_Turnos PRIMARY KEY (IdTurno),
+
+CONSTRAINT FK_Turnos_Medicos FOREIGN KEY (Legajo)
+	REFERENCES Medicos (Legajo),
+
+CONSTRAINT FK_Turnos_Pacientes FOREIGN KEY (IdPaciente)
+	REFERENCES Pacientes (IdPaciente),
+
+CONSTRAINT UQ_Turnos_Medico_Fecha_Hora UNIQUE (Legajo, Fecha, Hora),
+
+CONSTRAINT CK_Turnos_Estado CHECK (ESTADO IN ('Pendiente', 'Presente', 'Ausente'))
+
+);
 
 -- Procedimiento almacenado: Medicos y Usuarios. 
 
@@ -492,3 +521,4 @@ WHERE name IN
 )
 ORDER BY name
 GO
+
