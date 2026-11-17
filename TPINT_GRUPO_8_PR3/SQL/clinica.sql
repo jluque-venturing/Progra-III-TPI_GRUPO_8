@@ -208,6 +208,67 @@ CREATE TABLE HorariosMedico
 	CONSTRAINT CK_HorariosMedico_Horas CHECK (HoraInicio < HoraFin AND HoraFin <= 24)
 );
 GO
+--Procedimiento almacenado de pacientes
+
+USE clinica
+GO
+
+CREATE PROCEDURE spAgregarPaciente
+	@IdPaciente CHAR(8),
+	@Dni CHAR(15),
+	@Nombre VARCHAR(50),
+	@Apellido VARCHAR(50),
+	@Sexo CHAR(1),
+	@Nacionalidad VARCHAR(50),
+	@FechaNacimiento DATE,
+	@Direccion VARCHAR(100),
+	@Email VARCHAR(100),
+	@Telefono VARCHAR(20),
+	@IdLocalidad CHAR(8)
+AS
+BEGIN
+	INSERT INTO Pacientes
+		(IdPaciente, Dni, Nombre, Apellido, Sexo, Nacionalidad, FechaNacimiento, Direccion, Email, Telefono, IdLocalidad)
+	VALUES
+		(@IdPaciente, @Dni, @Nombre, @Apellido, @Sexo, @Nacionalidad, @FechaNacimiento, @Direccion, @Email, @Telefono, @IdLocalidad);
+END
+GO
+
+CREATE PROCEDURE spModificarPaciente
+	@Dni CHAR(15),
+	@Nombre VARCHAR(50),
+	@Apellido VARCHAR(50),
+	@Sexo CHAR(1),
+	@Nacionalidad VARCHAR(50),
+	@FechaNacimiento DATE,
+	@Direccion VARCHAR(100),
+	@Email VARCHAR(100),
+	@Telefono VARCHAR(20),
+	@IdLocalidad CHAR(8)
+AS
+BEGIN
+	UPDATE Pacientes
+	SET Nombre = @Nombre,
+		Apellido = @Apellido,
+		Sexo = @Sexo,
+		Nacionalidad = @Nacionalidad,
+		FechaNacimiento = @FechaNacimiento,
+		Direccion = @Direccion,
+		Email = @Email,
+		Telefono = @Telefono,
+		IdLocalidad = @IdLocalidad
+	WHERE Dni = @Dni;
+END
+GO
+
+CREATE PROCEDURE spBajaPaciente
+	@Dni CHAR(15)
+AS
+BEGIN
+	UPDATE Pacientes SET Activo = 0 WHERE Dni = @Dni;
+END
+GO
+
 
 -- Procedimiento almacenado: Medicos y Usuarios. 
 
