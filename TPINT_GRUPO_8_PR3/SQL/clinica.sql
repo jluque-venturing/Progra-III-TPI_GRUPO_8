@@ -257,7 +257,7 @@ BEGIN
 	INSERT INTO Pacientes
 		(IdPaciente, Dni, Nombre, Apellido, Sexo, Nacionalidad, FechaNacimiento, Direccion, Email, Telefono, IdLocalidad)
 	VALUES
-		(@IdMedicoHorario, @Legajo, @Dia, @HoraDesde, @HoraHasta);
+		(@IdPaciente, @Dni, @Nombre, @Apellido, @Sexo, @Nacionalidad, @FechaNacimiento, @Direccion, @Email, @Telefono, @IdLocalidad);
 END
 GO
 
