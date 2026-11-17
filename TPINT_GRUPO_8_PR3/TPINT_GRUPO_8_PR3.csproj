@@ -73,6 +73,7 @@
     <Content Include="Pacientes.aspx" />
     <Content Include="Turnos.aspx" />
     <Content Include="Web.config" />
+    <Content Include="Informes.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InicioAdmin.aspx.cs">
@@ -110,6 +111,13 @@
     </Compile>
     <Compile Include="Turnos.aspx.designer.cs">
       <DependentUpon>Turnos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Informes.aspx.cs">
+      <DependentUpon>Informes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Informes.aspx.designer.cs">
+      <DependentUpon>Informes.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
