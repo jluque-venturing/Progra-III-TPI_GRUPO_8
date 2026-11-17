@@ -407,3 +407,37 @@ BEGIN
 	WHERE IdTurno = @IdTurno;
 END
 GO
+
+CREATE PROCEDURE SpAgregarTurno
+
+
+@IdTurno CHAR(8),
+@Legajo CHAR(8),
+@IdPaciente CHAR(8),
+@Fecha DATE,
+@Hora TIME(0)
+
+AS
+BEGIN
+
+INSERT INTO Turnos
+(
+IdTurno,
+Legajo,
+IdPaciente,
+Fecha,
+Hora,
+Estado
+)
+VALUES
+(
+@IdTurno,
+@Legajo,
+@IdPaciente,
+@Fecha,
+@Hora,
+'Pendiente'
+);
+
+END
+GO
