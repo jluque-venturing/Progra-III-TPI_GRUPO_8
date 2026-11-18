@@ -18,5 +18,15 @@ namespace TPINT_GRUPO_8_PR3
 
             }
         }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
