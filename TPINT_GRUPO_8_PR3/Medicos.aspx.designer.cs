@@ -114,13 +114,13 @@ namespace TPINT_GRUPO_8_PR3
         protected global::System.Web.UI.WebControls.Label lblSexo;
 
         /// <summary>
-        /// Control txtSexo.
+        /// Control ddlSexo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSexo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSexo;
 
         /// <summary>
         /// Control lblNacionalidad.
@@ -186,13 +186,13 @@ namespace TPINT_GRUPO_8_PR3
         protected global::System.Web.UI.WebControls.Label lblLocalidad;
 
         /// <summary>
-        /// Control txtLocalidad.
+        /// Control ddlLocalidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLocalidad;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocalidad;
 
         /// <summary>
         /// Control lblProvincia.
@@ -204,13 +204,13 @@ namespace TPINT_GRUPO_8_PR3
         protected global::System.Web.UI.WebControls.Label lblProvincia;
 
         /// <summary>
-        /// Control txtProvincia.
+        /// Control ddlProvincia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProvincia;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProvincia;
 
         /// <summary>
         /// Control lblEmail.
@@ -283,6 +283,24 @@ namespace TPINT_GRUPO_8_PR3
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblDias;
+
+        /// <summary>
+        /// Control lblHoraInicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHoraInicio;
+
+        /// <summary>
+        /// Control lblHoraFin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHoraFin;
 
         /// <summary>
         /// Control ddlHoraFin.

@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InicioAdmin.aspx.cs" Inherits="TPINT_GRUPO_8_PR3.InicioAdmin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InicioAdmin.aspx.cs" Inherits="TPINT_GRUPO_8_PR3.InicioAdmin" %>
 
 <!DOCTYPE html>
 

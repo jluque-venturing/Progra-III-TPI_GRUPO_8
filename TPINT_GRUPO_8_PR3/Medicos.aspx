@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>Médicos</title>
     <style type="text/css">
         .auto-style1 {
             width: 100%;
@@ -127,7 +127,11 @@
                     <asp:Label ID="lblSexo" runat="server" Text="Sexo"></asp:Label>
                 </td>
                 <td class="auto-style19">
-                    <asp:TextBox ID="txtSexo" runat="server"></asp:TextBox>
+                    <asp:DropDownList ID="ddlSexo" runat="server">
+                        <asp:ListItem Text="Seleccione..." Value="" />
+                        <asp:ListItem Text="Masculino" Value="M" />
+                        <asp:ListItem Text="Femenino" Value="F" />
+                    </asp:DropDownList>
                 </td>
                 <td>&nbsp;</td>
             </tr>
@@ -145,7 +149,7 @@
                     <asp:Label ID="lblFechaNacimiento" runat="server" Text="Fecha de Nacimiento"></asp:Label>
                 </td>
                 <td class="auto-style21">
-                    <asp:TextBox ID="txtFechaNacimiento" runat="server" TextMode="DateTime"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaNacimiento" runat="server" TextMode="Date"></asp:TextBox>
                 </td>
                 <td class="auto-style10"></td>
             </tr>
@@ -160,19 +164,23 @@
             </tr>
             <tr>
                 <td class="auto-style9">
-                    <asp:Label ID="lblLocalidad" runat="server" Text="Localidad"></asp:Label>
+                    <asp:Label ID="lblProvincia" runat="server" Text="Provincia"></asp:Label>
                 </td>
                 <td class="auto-style21">
-                    <asp:TextBox ID="txtLocalidad" runat="server"></asp:TextBox>
+                    <asp:DropDownList ID="ddlProvincia" runat="server">
+                        <asp:ListItem Text="Seleccione una provincia..." Value="" />
+                    </asp:DropDownList>
                 </td>
                 <td class="auto-style10"></td>
             </tr>
             <tr>
                 <td class="auto-style13">
-                    <asp:Label ID="lblProvincia" runat="server" Text="Provincia"></asp:Label>
+                    <asp:Label ID="lblLocalidad" runat="server" Text="Localidad"></asp:Label>
                 </td>
                 <td class="auto-style19">
-                    <asp:TextBox ID="txtProvincia" runat="server"></asp:TextBox>
+                    <asp:DropDownList ID="ddlLocalidad" runat="server">
+                        <asp:ListItem Text="Seleccione una localidad..." Value="" />
+                    </asp:DropDownList>
                 </td>
                 <td>&nbsp;</td>
             </tr>
@@ -202,6 +210,7 @@
                 </td>
                 <td class="auto-style22">
                     <asp:DropDownList ID="ddlEspecialidad" runat="server">
+                        <asp:ListItem Text="Seleccione una especialidad..." Value="" />
                     </asp:DropDownList>
                 </td>
                 <td class="auto-style2"></td>
@@ -240,7 +249,8 @@
             </tr>
             <tr>
                 <td class="auto-style16">
-                    <asp:DropDownList ID="ddlHoraFin" runat="server">
+                    <asp:Label ID="lblHoraInicio" runat="server" Text="Desde"></asp:Label>
+                    <asp:DropDownList ID="ddlHoraInicio" runat="server">
                         <asp:ListItem>08:00</asp:ListItem>
                         <asp:ListItem>09:00</asp:ListItem>
                         <asp:ListItem>10:00</asp:ListItem>
@@ -261,7 +271,8 @@
             </tr>
             <tr>
                 <td class="auto-style16">
-                    <asp:DropDownList ID="ddlHoraInicio" runat="server">
+                    <asp:Label ID="lblHoraFin" runat="server" Text="Hasta"></asp:Label>
+                    <asp:DropDownList ID="ddlHoraFin" runat="server">
                         <asp:ListItem>08:00</asp:ListItem>
                         <asp:ListItem>09:00</asp:ListItem>
                         <asp:ListItem>10:00</asp:ListItem>
@@ -356,6 +367,7 @@
                 <td class="auto-style28">&nbsp;</td>
                 <td class="auto-style29">
                     <asp:DropDownList ID="ddlFiltrarEspecialidad" runat="server">
+                        <asp:ListItem Text="Todas las especialidades" Value="" />
                     </asp:DropDownList>
                 </td>
                 <td>
@@ -372,7 +384,54 @@
             <tr>
                 <td>&nbsp;</td>
                 <td>
-                    <asp:GridView ID="gvMedicos" runat="server">
+                    <asp:GridView ID="gvMedicos" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" EmptyDataText="No hay médicos registrados.">
+                        <Columns>
+                            <asp:TemplateField HeaderText="Legajo">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItLegajo" runat="server" Text='<%# Bind("Legajo") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="DNI">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItDni" runat="server" Text='<%# Bind("Dni") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Nombre">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Apellido">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItApellido" runat="server" Text='<%# Bind("Apellido") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Especialidad">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItEspecialidad" runat="server" Text='<%# Bind("Especialidad") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Email">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItEmail" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Teléfono">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItTelefono" runat="server" Text='<%# Bind("Telefono") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Localidad">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItLocalidad" runat="server" Text='<%# Bind("Localidad") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Provincia">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItProvincia" runat="server" Text='<%# Bind("Provincia") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
                     </asp:GridView>
                 </td>
                 <td>&nbsp;</td>

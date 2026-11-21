@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +12,11 @@ namespace TPINT_GRUPO_8_PR3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                gvMedicos.DataSource = new DataTable();
+                gvMedicos.DataBind();
+            }
         }
     }
 }
