@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -10,13 +11,22 @@ namespace TPINT_GRUPO_8_PR3
 {
     public partial class Pacientes : System.Web.UI.Page
     {
+        private NegocioPaciente negocio = new NegocioPaciente();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                gvPacientes.DataSource = new DataTable();
+                gvPacientes.DataSource = negocio.getTabla();
                 gvPacientes.DataBind();
             }
+        }
+
+        protected void gvPacientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvPacientes.PageIndex = e.NewPageIndex;
+            gvPacientes.DataSource = negocio.getTabla();
+            gvPacientes.DataBind();
         }
     }
 }

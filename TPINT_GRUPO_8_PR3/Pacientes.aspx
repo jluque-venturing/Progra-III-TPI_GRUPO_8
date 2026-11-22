@@ -148,8 +148,8 @@
                 ShowHeaderWhenEmpty="True"
                 EmptyDataText="No hay pacientes registrados."
                 AllowPaging="True"
-                PageSize="10">
-
+                PageSize="10"
+                OnPageIndexChanging="gvPacientes_PageIndexChanging">
                 <Columns>
 
                     <asp:TemplateField HeaderText="DNI">

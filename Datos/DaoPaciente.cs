@@ -2,7 +2,7 @@
 
 namespace Datos
 {
-    internal class DaoPaciente
+    public class DaoPaciente
     {
         private AccesoDatos ds = new AccesoDatos();
 
