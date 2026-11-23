@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    internal class DaoUsuario
+    public class DaoUsuario
     {
         private readonly string rutaBDClinica = @"Data Source=localhost\sqlexpress;Initial Catalog=clinica;Integrated Security=True";
 
