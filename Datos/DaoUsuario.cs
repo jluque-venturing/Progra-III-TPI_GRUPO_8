@@ -10,7 +10,7 @@ namespace Datos
 {
     public class DaoUsuario
     {
-        private readonly string rutaBDClinica = @"Data Source=localhost\sqlexpress;Initial Catalog=clinica;Integrated Security=True";
+        private readonly string rutaBDClinica = @"Data Source=localhost\sqlexpress;Initial Catalog=clinicaGrupo8;Integrated Security=True";
 
         public Usuario GetUsuario(string usuario, string clave)
         {
