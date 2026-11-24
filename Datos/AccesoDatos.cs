@@ -10,7 +10,7 @@ namespace Datos
 {
     class AccesoDatos
     {
-        String rutaBDClinica = @"Data Source=localhost\sqlexpress;Initial Catalog=clinica;Integrated Security=True";
+        String rutaBDClinica = @"Data Source=localhost\sqlexpress;Initial Catalog=clinicaGrupo8;Integrated Security=True";
 
         public AccesoDatos()
         {

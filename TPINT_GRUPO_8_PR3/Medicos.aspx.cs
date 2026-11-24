@@ -1,22 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
+﻿using Negocio;
+using System;
 using System.Web.UI.WebControls;
 
 namespace TPINT_GRUPO_8_PR3
 {
     public partial class Medicos : System.Web.UI.Page
     {
+        private NegocioMedico negocio = new NegocioMedico();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                gvMedicos.DataSource = new DataTable();
-                gvMedicos.DataBind();
+                CargarMedicos("");
             }
+        }
+
+        private void CargarMedicos(string filtro)
+        {
+            if (string.IsNullOrWhiteSpace(filtro))
+            {
+                gvMedicos.DataSource = negocio.getTabla();
+            }
+            else
+            {
+                gvMedicos.DataSource = negocio.buscarMedicos(filtro);
+            }
+
+            gvMedicos.DataBind();
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            gvMedicos.PageIndex = 0;
+            CargarMedicos(txtBuscar.Text.Trim());
+        }
+
+        protected void gvMedicos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvMedicos.PageIndex = e.NewPageIndex;
+            CargarMedicos(txtBuscar.Text.Trim());
         }
     }
 }

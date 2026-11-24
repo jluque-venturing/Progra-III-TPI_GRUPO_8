@@ -360,7 +360,7 @@
                     <asp:TextBox ID="txtBuscar" runat="server" style="margin-left: 0px" Width="176px"></asp:TextBox>
                 </td>
                 <td>
-                    <asp:Button ID="btnBuscar" runat="server" style="margin-left: 0px" Text="Buscar" />
+                    <asp:Button ID="btnBuscar" runat="server" style="margin-left: 0px" Text="Buscar" OnClick="btnBuscar_Click" />
                 </td>
             </tr>
             <tr>
@@ -384,7 +384,7 @@
             <tr>
                 <td>&nbsp;</td>
                 <td>
-                    <asp:GridView ID="gvMedicos" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" EmptyDataText="No hay médicos registrados.">
+                    <asp:GridView ID="gvMedicos" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" EmptyDataText="No hay médicos registrados." AllowPaging="True" PageSize="10" OnPageIndexChanging="gvMedicos_PageIndexChanging">
                         <Columns>
                             <asp:TemplateField HeaderText="Legajo">
                                 <ItemTemplate>
