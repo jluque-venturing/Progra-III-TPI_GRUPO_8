@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Entidades;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entidades;
 
 namespace TPINT_GRUPO_8_PR3
 {
@@ -18,6 +19,7 @@ namespace TPINT_GRUPO_8_PR3
             if (!IsPostBack)
             {
                 cargarGvTurnos();
+                cargarEspecialidades();
             }
         }
         protected void gvTurnos_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -38,6 +40,32 @@ namespace TPINT_GRUPO_8_PR3
 
             gvTurnos.DataSource = dt;
             gvTurnos.DataBind();
+        }
+
+        private void cargarEspecialidades()
+        {
+            NegocioEspecialidad negocioEspecialidad = new NegocioEspecialidad();
+            ddlEspecialidad.DataSource = negocioEspecialidad.getTabla();
+            ddlEspecialidad.DataTextField = "Nombre";
+            ddlEspecialidad.DataValueField = "IdEspecialidad";
+            ddlEspecialidad.DataBind();
+        }
+
+        protected void ddlEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlMedico.Items.Clear();
+            ddlMedico.Items.Add(new ListItem("-- Seleccionar --", "0"));
+
+            if (ddlEspecialidad.SelectedValue == "0") return;
+
+            NegocioMedico negocioMedico = new NegocioMedico();
+            DataTable medicos = negocioMedico.filtrarPorEspecialidad("", ddlEspecialidad.SelectedValue);
+
+            foreach (DataRow fila in medicos.Rows)
+            {
+                string nombreCompleto = fila["apellido"] + ", " + fila["nombre"];
+                ddlMedico.Items.Add(new ListItem(nombreCompleto, fila["legajo"].ToString()));
+            }
         }
     }
 }

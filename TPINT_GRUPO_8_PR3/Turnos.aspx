@@ -48,7 +48,7 @@
                 </td>
 
                 <td class="auto-style3">
-                    <asp:DropDownList ID="ddlEspecialidad" runat="server">
+                    <asp:DropDownList ID="ddlEspecialidad" runat="server" AppendDataBoundItems="True" AutoPostBack="True" OnSelectedIndexChanged="ddlEspecialidad_SelectedIndexChanged">
                         <asp:ListItem Text="-- Seleccionar --" Value="0"/>
                     </asp:DropDownList>
                 </td>
