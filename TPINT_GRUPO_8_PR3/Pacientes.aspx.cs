@@ -13,20 +13,38 @@ namespace TPINT_GRUPO_8_PR3
     {
         private NegocioPaciente negocio = new NegocioPaciente();
 
+        private void CargarPacientes(string filtro)
+        {
+            if (string.IsNullOrWhiteSpace(filtro))
+            {
+                gvPacientes.DataSource = negocio.getTabla();
+            }
+            else
+            {
+                gvPacientes.DataSource = negocio.buscarPacientes(filtro);
+            }
+
+            gvPacientes.DataBind();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                gvPacientes.DataSource = negocio.getTabla();
-                gvPacientes.DataBind();
+                CargarPacientes("");
             }
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            gvPacientes.PageIndex = 0;
+            CargarPacientes(txtBuscar.Text.Trim());
         }
 
         protected void gvPacientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvPacientes.PageIndex = e.NewPageIndex;
-            gvPacientes.DataSource = negocio.getTabla();
-            gvPacientes.DataBind();
+            CargarPacientes(txtBuscar.Text.Trim());
         }
     }
 }

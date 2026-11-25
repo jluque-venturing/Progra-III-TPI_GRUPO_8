@@ -122,7 +122,7 @@
                         <asp:TextBox ID="txtBuscar" runat="server" />
                     </td>
                     <td>
-                        <asp:Button ID="btnBuscar" runat="server" Text="Buscar" />
+                        <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" CausesValidation="False" />
                     </td>
                     <td>
                         <asp:Label ID="lblFiltrarSexo" runat="server" Text="Filtrar por sexo:" />

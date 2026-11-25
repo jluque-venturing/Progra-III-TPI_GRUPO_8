@@ -15,5 +15,10 @@ namespace Negocio
             DaoPaciente dao = new DaoPaciente();
             return dao.getTablaPacientes();
         }
+        public DataTable buscarPacientes(string filtro)
+        {
+            DaoPaciente dao = new DaoPaciente();
+            return dao.buscarPacientes(filtro);
+        }
     }
 }
