@@ -1,4 +1,5 @@
 ﻿using Datos;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,6 +32,19 @@ namespace Negocio
         {
             DaoPaciente dao = new DaoPaciente();
             return dao.getTablaLocalidades(idProvincia);
+        }
+
+        public bool agregarPaciente(Paciente p)
+        {
+            DaoPaciente dao = new DaoPaciente();
+
+            if (dao.existePaciente(p.getDni()))
+            {
+                return false;
+            }
+
+            p.setIdPaciente(dao.generarIdPaciente());
+            return dao.agregarPaciente(p) == 1;
         }
     }
 }

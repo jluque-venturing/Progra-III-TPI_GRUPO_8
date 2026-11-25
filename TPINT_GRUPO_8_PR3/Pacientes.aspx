@@ -215,7 +215,8 @@
                 ID="btnGuardar"
                 runat="server"
                 Text="Guardar"
-                CausesValidation="True" />
+                CausesValidation="True"
+                OnClick="btnGuardar_Click" />
 
             <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" />
 

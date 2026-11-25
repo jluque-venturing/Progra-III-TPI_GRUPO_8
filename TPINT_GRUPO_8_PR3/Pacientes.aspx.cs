@@ -78,6 +78,54 @@ namespace TPINT_GRUPO_8_PR3
             ddlLocalidad.Items.Insert(0, new ListItem("Seleccione una localidad...", ""));
         }
 
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (!Page.IsValid)
+                return;
+
+            Paciente p = new Paciente();
+            p.setDni(txtDni.Text.Trim());
+            p.setNombre(txtNombre.Text.Trim());
+            p.setApellido(txtApellido.Text.Trim());
+            p.setSexo(ddlSexo.SelectedValue);
+            p.setNacionalidad(txtNacionalidad.Text.Trim());
+            p.setFechaNacimiento(DateTime.Parse(txtFechaNacimiento.Text));
+            p.setDireccion(txtDireccion.Text.Trim());
+            p.setEmail(txtEmail.Text.Trim());
+            p.setTelefono(txtTelefono.Text.Trim());
+            p.setIdProvincia(ddlProvincia.SelectedValue);
+            p.setIdLocalidad(ddlLocalidad.SelectedValue);
+
+            if (negocio.agregarPaciente(p))
+            {
+                lblMensaje.ForeColor = System.Drawing.Color.Green;
+                lblMensaje.Text = "Se agregó correctamente";
+                LimpiarControles();
+                CargarPacientes(txtBuscar.Text.Trim());
+            }
+            else
+            {
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                lblMensaje.Text = "Ya existe un paciente con ese DNI";
+            }
+        }
+
+        private void LimpiarControles()
+        {
+            txtDni.Text = "";
+            txtNombre.Text = "";
+            txtApellido.Text = "";
+            ddlSexo.SelectedIndex = 0;
+            txtNacionalidad.Text = "";
+            txtFechaNacimiento.Text = "";
+            txtDireccion.Text = "";
+            txtEmail.Text = "";
+            txtTelefono.Text = "";
+            ddlProvincia.SelectedIndex = 0;
+            ddlLocalidad.Items.Clear();
+            ddlLocalidad.Items.Insert(0, new ListItem("Seleccione una localidad...", ""));
+        }
+
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             gvPacientes.PageIndex = 0;
