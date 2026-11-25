@@ -33,6 +33,15 @@ namespace TPINT_GRUPO_8_PR3
         protected global::System.Web.UI.WebControls.Label lblUsuario;
 
         /// <summary>
+        /// Control lbtnCerrarSesion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnCerrarSesion;
+
+        /// <summary>
         /// Control lblBuscar.
         /// </summary>
         /// <remarks>

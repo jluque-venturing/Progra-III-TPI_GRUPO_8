@@ -25,6 +25,11 @@ namespace TPINT_GRUPO_8_PR3
         protected global::System.Web.UI.WebControls.Label lblUsuario;
 
         /// <summary>
+        /// Control lbtnCerrarSesion.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnCerrarSesion;
+
+        /// <summary>
         /// Control hlPacientes.
         /// </summary>
         protected global::System.Web.UI.WebControls.HyperLink hlPacientes;

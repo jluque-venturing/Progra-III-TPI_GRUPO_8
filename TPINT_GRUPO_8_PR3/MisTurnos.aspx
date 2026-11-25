@@ -21,6 +21,9 @@
                 <td>
                     <asp:Label ID="lblUsuario" runat="server" Text=""></asp:Label>
                 </td>
+                <td align="right">
+                    <asp:LinkButton ID="lbtnCerrarSesion" runat="server" CausesValidation="False" OnClick="lbtnCerrarSesion_Click">Cerrar sesión</asp:LinkButton>
+                </td>
             </tr>
             </table>
             <table style="width: 100%";> 

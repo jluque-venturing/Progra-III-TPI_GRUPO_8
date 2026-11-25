@@ -28,5 +28,11 @@ namespace TPINT_GRUPO_8_PR3
 
             lblUsuario.Text = u.Nombre + " " + u.Apellido;
         }
+
+        protected void lbtnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session["usuario"] = null;
+            Response.Redirect("Login.aspx");
+        }
     }
 }

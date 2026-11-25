@@ -14,6 +14,8 @@
                 <tr>
                     <td colspan="4" align="right">
                         <asp:Label ID="lblUsuario" runat="server"></asp:Label>
+                        &nbsp;
+                        <asp:LinkButton ID="lbtnCerrarSesion" runat="server" CausesValidation="False" OnClick="lbtnCerrarSesion_Click">Cerrar sesión</asp:LinkButton>
                     </td>
                 </tr>
                 <tr>

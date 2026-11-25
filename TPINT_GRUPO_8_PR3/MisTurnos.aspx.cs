@@ -33,6 +33,12 @@ namespace TPINT_GRUPO_8_PR3
             }
         }
 
+        protected void lbtnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session["usuario"] = null;
+            Response.Redirect("Login.aspx");
+        }
+
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
 
