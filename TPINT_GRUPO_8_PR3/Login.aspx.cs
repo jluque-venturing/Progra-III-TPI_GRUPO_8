@@ -31,6 +31,11 @@ namespace TPINT_GRUPO_8_PR3
             }
 
             Session["usuario"] = u;
+
+            if (u.Tipo == 'A')
+                Response.Redirect("InicioAdmin.aspx");
+            else
+                Response.Redirect("MisTurnos.aspx");
         }
     }
 }
