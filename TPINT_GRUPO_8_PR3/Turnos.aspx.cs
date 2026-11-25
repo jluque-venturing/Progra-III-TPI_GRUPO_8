@@ -82,5 +82,43 @@ namespace TPINT_GRUPO_8_PR3
                 ddlMedico.Items.Add(new ListItem(nombreCompleto, fila["legajo"].ToString()));
             }
         }
+
+        protected void txtFecha_TextChanged(object sender, EventArgs e)
+        {
+            ValidarFecha();
+        }
+
+        private bool ValidarFecha()
+        {
+            lblMensajeFecha.Text = "";
+
+            DateTime fecha;
+            if (!DateTime.TryParse(txtFecha.Text, out fecha))
+            {
+                lblMensajeFecha.Text = "Seleccione una fecha";
+                return false;
+            }
+
+            if (fecha.Date < DateTime.Today)
+            {
+                lblMensajeFecha.Text = "La fecha no puede ser anterior a hoy";
+                return false;
+            }
+
+            if (ddlMedico.SelectedValue == "0")
+            {
+                lblMensajeFecha.Text = "Seleccione un médico";
+                return false;
+            }
+
+            NegocioMedico negocioMedico = new NegocioMedico();
+            if (!negocioMedico.atiendeElDia(ddlMedico.SelectedValue, fecha))
+            {
+                lblMensajeFecha.Text = "El médico no atiende los días " +negocioMedico.nombreDelDia(fecha);
+                return false;
+            }
+
+            return true;
+        }
     }
 }

@@ -109,6 +109,13 @@ namespace Datos
             return ds.ObtenerTabla("Medicos", consulta);
         }
 
+        public bool atiendeElDia(string legajo, string dia)
+        {
+            string consulta = "SELECT Legajo FROM MedicoHorarios WHERE Legajo = '" + legajo.Replace("'", "''") + "' AND Dia = '" + dia + "'";
+
+            return ds.existe(consulta);
+        }
+
         public bool existeLegajo(string legajo)
         {
             string consulta = "SELECT Legajo FROM Medicos WHERE Legajo = '" + legajo + "'";

@@ -81,11 +81,13 @@
 
                 <td class="auto-style3">
                     <asp:TextBox ID="txtFecha" runat="server"
-                        TextMode="Date">
+                        TextMode="Date" AutoPostBack="True" OnTextChanged="txtFecha_TextChanged">
                     </asp:TextBox>
                 </td>
 
-                <td>&nbsp;</td>
+                <td>
+                    <asp:Label ID="lblMensajeFecha" runat="server" ForeColor="Red"></asp:Label>
+                </td>
             </tr>
 
             <tr>
