@@ -16,6 +16,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Label ID="lblUsuario" runat="server"></asp:Label>
             <h2>Pantalla de informes</h2>
             <asp:HyperLink ID="hlInicioAdmin" runat="server" NavigateUrl="~/InicioAdmin.aspx">Volver al menú del administrador</asp:HyperLink>
 

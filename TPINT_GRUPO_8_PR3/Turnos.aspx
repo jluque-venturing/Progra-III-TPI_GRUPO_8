@@ -28,6 +28,8 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Label ID="lblUsuario" runat="server"></asp:Label>
+            <br />
             <asp:Label ID="lbltitulo_Turnos" runat="server"
                 Font-Bold="True"
                 Font-Size="X-Large"
