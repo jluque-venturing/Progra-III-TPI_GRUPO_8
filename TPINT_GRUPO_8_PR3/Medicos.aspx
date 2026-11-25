@@ -83,6 +83,8 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Label ID="lblUsuarioLogueado" runat="server"></asp:Label>
+            <br />
             <asp:Label ID="titulo" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Datos del Médico"></asp:Label>
         </div>
         <table class="auto-style1">

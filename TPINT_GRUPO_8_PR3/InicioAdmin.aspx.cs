@@ -1,3 +1,4 @@
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace TPINT_GRUPO_8_PR3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Usuario u = (Usuario)Session["usuario"];
+            lblUsuario.Text = u.Nombre + " " + u.Apellido;
         }
     }
 }

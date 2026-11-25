@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Entidades;
+using Negocio;
 using System;
 using System.Web.UI.WebControls;
 
@@ -10,6 +11,8 @@ namespace TPINT_GRUPO_8_PR3
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Usuario u = (Usuario)Session["usuario"];
+            lblUsuarioLogueado.Text = u.Nombre + " " + u.Apellido;
             if (!IsPostBack)
             {
                 CargarEspecialidades();

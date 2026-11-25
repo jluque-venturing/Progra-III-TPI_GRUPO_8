@@ -10,6 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Label ID="lblUsuario" runat="server" />
             <h2>Datos del paciente</h2>
 
             <table>
@@ -103,10 +104,6 @@
             <br />
 
             <asp:Label ID="lblMensaje" runat="server" />
-
-            <br />
-
-            <asp:Label ID="lblUsuario" runat="server" />
 
             <br />
             <br />
