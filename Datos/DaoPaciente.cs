@@ -69,5 +69,26 @@ namespace Datos
 
             return ds.existe(consulta);
         }
+
+        public DataTable getTablaProvincias()
+        {
+            string consulta = @"
+        SELECT IdProvincia, Nombre
+        FROM Provincias
+        ORDER BY Nombre";
+
+            return ds.ObtenerTabla("Provincias", consulta);
+        }
+
+        public DataTable getTablaLocalidades(string idProvincia)
+        {
+            string consulta = @"
+        SELECT IdLocalidad, Nombre
+        FROM Localidades
+        WHERE IdProvincia = '" + idProvincia + @"'
+        ORDER BY Nombre";
+
+            return ds.ObtenerTabla("Localidades", consulta);
+        }
     }
 }

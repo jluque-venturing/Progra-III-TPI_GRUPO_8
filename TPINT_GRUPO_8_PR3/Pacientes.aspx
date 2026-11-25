@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pacientes.aspx.cs" Inherits="TPINT_GRUPO_8_PR3.Pacientes" %>
-
+﻿
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pacientes.aspx.cs" Inherits="TPINT_GRUPO_8_PR3.Pacientes" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,87 +16,206 @@
             <table>
                 <tr>
                     <td>
-                        <asp:Label ID="lblDni" runat="server" Text="DNI:" /></td>
+                        <asp:Label ID="lblDni" runat="server" Text="DNI:" />
+                    </td>
                     <td>
-                        <asp:TextBox ID="txtDni" runat="server" /></td>
+                        <asp:TextBox ID="txtDni" runat="server" />
+                        <asp:RequiredFieldValidator
+                            ID="rfvDni"
+                            runat="server"
+                            ControlToValidate="txtDni"
+                            ErrorMessage="El DNI es obligatorio."
+                            ForeColor="Red"
+                            Display="Dynamic" />
+                        <asp:RegularExpressionValidator
+                            ID="revDni"
+                            runat="server"
+                            ControlToValidate="txtDni"
+                            ValidationExpression="^\d+$"
+                            ErrorMessage="El DNI debe contener solamente números."
+                            ForeColor="Red"
+                            Display="Dynamic" />
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblNombre" runat="server" Text="Nombre:" /></td>
+                        <asp:Label ID="lblNombre" runat="server" Text="Nombre:" />
+                    </td>
                     <td>
-                        <asp:TextBox ID="txtNombre" runat="server" /></td>
+                        <asp:TextBox ID="txtNombre" runat="server" />
+                        <asp:RequiredFieldValidator
+                            ID="rfvNombre"
+                            runat="server"
+                            ControlToValidate="txtNombre"
+                            ErrorMessage="El nombre es obligatorio."
+                            ForeColor="Red"
+                            Display="Dynamic" />
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblApellido" runat="server" Text="Apellido:" /></td>
+                        <asp:Label ID="lblApellido" runat="server" Text="Apellido:" />
+                    </td>
                     <td>
-                        <asp:TextBox ID="txtApellido" runat="server" /></td>
+                        <asp:TextBox ID="txtApellido" runat="server" />
+                        <asp:RequiredFieldValidator
+                            ID="rfvApellido"
+                            runat="server"
+                            ControlToValidate="txtApellido"
+                            ErrorMessage="El apellido es obligatorio."
+                            ForeColor="Red"
+                            Display="Dynamic" />
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblSexo" runat="server" Text="Sexo:" /></td>
+                        <asp:Label ID="lblSexo" runat="server" Text="Sexo:" />
+                    </td>
                     <td>
                         <asp:DropDownList ID="ddlSexo" runat="server">
                             <asp:ListItem Text="Seleccione..." Value="" />
                             <asp:ListItem Text="Masculino" Value="M" />
                             <asp:ListItem Text="Femenino" Value="F" />
                         </asp:DropDownList>
+                        <asp:RequiredFieldValidator
+                            ID="rfvSexo"
+                            runat="server"
+                            ControlToValidate="ddlSexo"
+                            InitialValue=""
+                            ErrorMessage="Debe seleccionar un sexo."
+                            ForeColor="Red"
+                            Display="Dynamic" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblNacionalidad" runat="server" Text="Nacionalidad:" /></td>
+                        <asp:Label ID="lblNacionalidad" runat="server" Text="Nacionalidad:" />
+                    </td>
                     <td>
-                        <asp:TextBox ID="txtNacionalidad" runat="server" /></td>
+                        <asp:TextBox ID="txtNacionalidad" runat="server" />
+                        <asp:RequiredFieldValidator
+                            ID="rfvNacionalidad"
+                            runat="server"
+                            ControlToValidate="txtNacionalidad"
+                            ErrorMessage="La nacionalidad es obligatoria."
+                            ForeColor="Red"
+                            Display="Dynamic" />
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblFechaNacimiento" runat="server" Text="Fecha de nacimiento:" /></td>
+                        <asp:Label ID="lblFechaNacimiento" runat="server" Text="Fecha de nacimiento:" />
+                    </td>
                     <td>
                         <asp:TextBox ID="txtFechaNacimiento" runat="server" TextMode="Date" />
+                        <asp:RequiredFieldValidator
+                            ID="rfvFechaNacimiento"
+                            runat="server"
+                            ControlToValidate="txtFechaNacimiento"
+                            ErrorMessage="La fecha de nacimiento es obligatoria."
+                            ForeColor="Red"
+                            Display="Dynamic" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblDireccion" runat="server" Text="Dirección:" /></td>
+                        <asp:Label ID="lblDireccion" runat="server" Text="Dirección:" />
+                    </td>
                     <td>
-                        <asp:TextBox ID="txtDireccion" runat="server" /></td>
+                        <asp:TextBox ID="txtDireccion" runat="server" />
+                        <asp:RequiredFieldValidator
+                            ID="rfvDireccion"
+                            runat="server"
+                            ControlToValidate="txtDireccion"
+                            ErrorMessage="La dirección es obligatoria."
+                            ForeColor="Red"
+                            Display="Dynamic" />
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblEmail" runat="server" Text="Email:" /></td>
+                        <asp:Label ID="lblEmail" runat="server" Text="Email:" />
+                    </td>
                     <td>
-                        <asp:TextBox ID="txtEmail" runat="server" /></td>
+                        <asp:TextBox ID="txtEmail" runat="server" />
+                        <asp:RequiredFieldValidator
+                            ID="rfvEmail"
+                            runat="server"
+                            ControlToValidate="txtEmail"
+                            ErrorMessage="El email es obligatorio."
+                            ForeColor="Red"
+                            Display="Dynamic" />
+                        <asp:RegularExpressionValidator
+                            ID="revEmail"
+                            runat="server"
+                            ControlToValidate="txtEmail"
+                            ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+                            ErrorMessage="Ingrese un email con formato válido."
+                            ForeColor="Red"
+                            Display="Dynamic" />
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblTelefono" runat="server" Text="Teléfono:" /></td>
+                        <asp:Label ID="lblTelefono" runat="server" Text="Teléfono:" />
+                    </td>
                     <td>
-                        <asp:TextBox ID="txtTelefono" runat="server" /></td>
+                        <asp:TextBox ID="txtTelefono" runat="server" />
+                        <asp:RequiredFieldValidator
+                            ID="rfvTelefono"
+                            runat="server"
+                            ControlToValidate="txtTelefono"
+                            ErrorMessage="El teléfono es obligatorio."
+                            ForeColor="Red"
+                            Display="Dynamic" />
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblProvincia" runat="server" Text="Provincia:" /></td>
+                        <asp:Label ID="lblProvincia" runat="server" Text="Provincia:" />
+                    </td>
                     <td>
-                        <asp:DropDownList ID="ddlProvincia" runat="server">
+                        <asp:DropDownList ID="ddlProvincia" runat="server" AutoPostBack="True"
+                            OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged">
                             <asp:ListItem Text="Seleccione una provincia..." Value="" />
                         </asp:DropDownList>
+                        <asp:RequiredFieldValidator
+                            ID="rfvProvincia"
+                            runat="server"
+                            ControlToValidate="ddlProvincia"
+                            InitialValue=""
+                            ErrorMessage="Debe seleccionar una provincia."
+                            ForeColor="Red"
+                            Display="Dynamic" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblLocalidad" runat="server" Text="Localidad:" /></td>
+                        <asp:Label ID="lblLocalidad" runat="server" Text="Localidad:" />
+                    </td>
                     <td>
                         <asp:DropDownList ID="ddlLocalidad" runat="server">
                             <asp:ListItem Text="Seleccione una localidad..." Value="" />
                         </asp:DropDownList>
+                        <asp:RequiredFieldValidator
+                            ID="rfvLocalidad"
+                            runat="server"
+                            ControlToValidate="ddlLocalidad"
+                            InitialValue=""
+                            ErrorMessage="Debe seleccionar una localidad."
+                            ForeColor="Red"
+                            Display="Dynamic" />
                     </td>
                 </tr>
             </table>
 
             <br />
 
-            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" />
+            <asp:Button
+                ID="btnGuardar"
+                runat="server"
+                Text="Guardar"
+                CausesValidation="True" />
 
             <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" />
 

@@ -28,6 +28,16 @@ namespace TPINT_GRUPO_8_PR3
             gvPacientes.DataBind();
         }
 
+        private void CargarProvincias()
+        {
+            ddlProvincia.DataSource = negocio.getTablaProvincias();
+            ddlProvincia.DataTextField = "Nombre";
+            ddlProvincia.DataValueField = "IdProvincia";
+            ddlProvincia.DataBind();
+
+            ddlProvincia.Items.Insert(0, new ListItem("Seleccione una provincia...", ""));
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Usuario u = (Usuario)Session["usuario"];
@@ -35,7 +45,23 @@ namespace TPINT_GRUPO_8_PR3
             if (!IsPostBack)
             {
                 CargarPacientes("");
+                CargarProvincias();
             }
+        }
+
+        protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlLocalidad.Items.Clear();
+
+            if (!string.IsNullOrEmpty(ddlProvincia.SelectedValue))
+            {
+                ddlLocalidad.DataSource = negocio.getTablaLocalidades(ddlProvincia.SelectedValue);
+                ddlLocalidad.DataTextField = "Nombre";
+                ddlLocalidad.DataValueField = "IdLocalidad";
+                ddlLocalidad.DataBind();
+            }
+
+            ddlLocalidad.Items.Insert(0, new ListItem("Seleccione una localidad...", ""));
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)

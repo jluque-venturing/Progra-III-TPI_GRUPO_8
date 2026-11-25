@@ -20,5 +20,17 @@ namespace Negocio
             DaoPaciente dao = new DaoPaciente();
             return dao.buscarPacientes(filtro);
         }
+
+        public DataTable getTablaProvincias()
+        {
+            DaoPaciente dao = new DaoPaciente();
+            return dao.getTablaProvincias();
+        }
+
+        public DataTable getTablaLocalidades(string idProvincia)
+        {
+            DaoPaciente dao = new DaoPaciente();
+            return dao.getTablaLocalidades(idProvincia);
+        }
     }
 }
