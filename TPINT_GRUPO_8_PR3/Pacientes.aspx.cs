@@ -41,7 +41,21 @@ namespace TPINT_GRUPO_8_PR3
         protected void Page_Load(object sender, EventArgs e)
         {
             Usuario u = (Usuario)Session["usuario"];
+
+            if (u == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
+            if (u.Tipo != 'A')
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
             lblUsuario.Text = u.Nombre + " " + u.Apellido;
+
             if (!IsPostBack)
             {
                 CargarPacientes("");
