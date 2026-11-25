@@ -16,5 +16,10 @@ namespace Negocio
         {
             return dao.buscarMedicos(filtro);
         }
+
+        public DataTable filtrarPorEspecialidad(string filtro, string idEspecialidad)
+        {
+            return dao.filtrarPorEspecialidad(filtro, idEspecialidad);
+        }
     }
 }

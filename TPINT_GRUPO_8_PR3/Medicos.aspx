@@ -366,12 +366,12 @@
             <tr>
                 <td class="auto-style28">&nbsp;</td>
                 <td class="auto-style29">
-                    <asp:DropDownList ID="ddlFiltrarEspecialidad" runat="server">
+                    <asp:DropDownList ID="ddlFiltrarEspecialidad" runat="server" AppendDataBoundItems="True">
                         <asp:ListItem Text="Todas las especialidades" Value="" />
                     </asp:DropDownList>
                 </td>
                 <td>
-                    <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" />
+                    <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" />
                 </td>
             </tr>
             <tr>

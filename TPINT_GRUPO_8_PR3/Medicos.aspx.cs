@@ -12,13 +12,29 @@ namespace TPINT_GRUPO_8_PR3
         {
             if (!IsPostBack)
             {
+                CargarEspecialidades();
                 CargarMedicos("");
             }
         }
 
+        private void CargarEspecialidades()
+        {
+            NegocioEspecialidad negocioEspecialidad = new NegocioEspecialidad();
+            ddlFiltrarEspecialidad.DataSource = negocioEspecialidad.getTabla();
+            ddlFiltrarEspecialidad.DataTextField = "Nombre";
+            ddlFiltrarEspecialidad.DataValueField = "IdEspecialidad";
+            ddlFiltrarEspecialidad.DataBind();
+        }
+
         private void CargarMedicos(string filtro)
         {
-            if (string.IsNullOrWhiteSpace(filtro))
+            string idEspecialidad = ddlFiltrarEspecialidad.SelectedValue;
+
+            if (idEspecialidad != "")
+            {
+                gvMedicos.DataSource = negocio.filtrarPorEspecialidad(filtro, idEspecialidad);
+            }
+            else if (string.IsNullOrWhiteSpace(filtro))
             {
                 gvMedicos.DataSource = negocio.getTabla();
             }
@@ -31,6 +47,12 @@ namespace TPINT_GRUPO_8_PR3
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            gvMedicos.PageIndex = 0;
+            CargarMedicos(txtBuscar.Text.Trim());
+        }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
         {
             gvMedicos.PageIndex = 0;
             CargarMedicos(txtBuscar.Text.Trim());
