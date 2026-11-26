@@ -266,9 +266,10 @@
                 EmptyDataText="No hay pacientes registrados."
                 AllowPaging="True"
                 PageSize="10"
-                OnPageIndexChanging="gvPacientes_PageIndexChanging">
+                OnPageIndexChanging="gvPacientes_PageIndexChanging"
+                OnSelectedIndexChanged="gvPacientes_SelectedIndexChanged">
                 <Columns>
-
+                    <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
                     <asp:TemplateField HeaderText="DNI">
                         <ItemTemplate>
                             <asp:Label ID="lblDni" runat="server" Text='<%# Bind("Dni") %>' />

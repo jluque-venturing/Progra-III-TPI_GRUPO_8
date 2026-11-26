@@ -1,12 +1,13 @@
-﻿using Negocio;
+﻿using Entidades;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entidades;
 
 namespace TPINT_GRUPO_8_PR3
 {
@@ -136,6 +137,46 @@ namespace TPINT_GRUPO_8_PR3
         {
             gvPacientes.PageIndex = e.NewPageIndex;
             CargarPacientes(txtBuscar.Text.Trim());
+        }
+        protected void gvPacientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow fila = gvPacientes.SelectedRow;
+
+            txtDni.Text = ((Label)fila.FindControl("lblDni")).Text;
+            txtNombre.Text = ((Label)fila.FindControl("lblNombre")).Text;
+            txtApellido.Text = ((Label)fila.FindControl("lblApellido")).Text;
+            txtNacionalidad.Text = ((Label)fila.FindControl("lblNacionalidad")).Text;
+            txtDireccion.Text = ((Label)fila.FindControl("lblDireccion")).Text;
+            txtEmail.Text = ((Label)fila.FindControl("lblEmail")).Text;
+            txtTelefono.Text = ((Label)fila.FindControl("lblTelefono")).Text;
+
+            ddlSexo.SelectedValue = ((Label)fila.FindControl("lblSexo")).Text;
+
+            // La grilla muestra dd/MM/yyyy, pero un TextBox con TextMode="Date" requiere yyyy-MM-dd
+            string fechaGrilla = ((Label)fila.FindControl("lblFechaNacimiento")).Text;
+            DateTime fecha;
+            if (DateTime.TryParseExact(fechaGrilla, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fecha))
+            {
+                txtFechaNacimiento.Text = fecha.ToString("yyyy-MM-dd");
+            }
+
+            // La grilla solo tiene los nombres, por eso se busca el ítem por texto
+            SeleccionarPorTexto(ddlProvincia, ((Label)fila.FindControl("lblProvincia")).Text);
+            ddlProvincia_SelectedIndexChanged(ddlProvincia, EventArgs.Empty);
+            SeleccionarPorTexto(ddlLocalidad, ((Label)fila.FindControl("lblLocalidad")).Text);
+
+            // El DNI es la clave, por eso no se puede modificar
+            txtDni.Enabled = false;
+        }
+
+        private void SeleccionarPorTexto(DropDownList ddl, string texto)
+        {
+            ddl.ClearSelection();
+            ListItem item = ddl.Items.FindByText(texto);
+            if (item != null)
+            {
+                item.Selected = true;
+            }
         }
     }
 }
