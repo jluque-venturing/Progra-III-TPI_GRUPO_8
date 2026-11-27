@@ -1,4 +1,4 @@
-﻿using Entidades;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -67,6 +67,31 @@ namespace Datos
             }
 
             return null;
+        }
+
+
+        public int GetEstadoMedico(string usuario, string clave)
+        {
+            string sql = "SELECT Activo FROM Medicos WHERE Usuario = @usuario AND Clave = @clave";
+
+            using (SqlConnection cn = new SqlConnection(rutaBDClinica))
+            using (SqlCommand cmd = new SqlCommand(sql, cn))
+            {
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@clave", clave);
+                cn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        bool activo = Convert.ToBoolean(reader["Activo"]);
+                        return activo ? 1 : 2;
+                    }
+                }
+            }
+
+            return 0;
         }
     }
 }

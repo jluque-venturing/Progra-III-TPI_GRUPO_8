@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,9 +22,16 @@ namespace TPINT_GRUPO_8_PR3
                 return;
 
             NegocioUsuario neg = new NegocioUsuario();
-            Usuario u = neg.login(txtUsuario.Text, txtContrasena.Text); 
+            Usuario u;
+            int estado = neg.obtenerEstadoLogin(txtUsuario.Text.Trim(), txtContrasena.Text, out u);
 
-            if (u == null)
+            if (estado == 2)
+            {
+                lblMensaje.Text = "El usuario está dado de baja";
+                return;
+            }
+
+            if (estado != 1 || u == null)
             {
                 lblMensaje.Text = "Usuario o contraseña incorrectos";
                 return;
