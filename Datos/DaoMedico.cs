@@ -115,6 +115,12 @@ namespace Datos
 
             return ds.existe(consulta);
         }
+        public DataTable getHorarioDelDia(string legajo, string dia)
+        {
+            string consulta = "SELECT HoraDesde, HoraHasta FROM MedicoHorarios WHERE Legajo = '"
+                + legajo.Replace("'", "''") + "' AND Dia = '" + dia + "'";
+            return ds.ObtenerTabla("MedicoHorarios", consulta);
+        }
 
         public bool existeLegajo(string legajo)
         {
@@ -129,5 +135,6 @@ namespace Datos
 
             return ds.existe(consulta);
         }
+       
     }
 }

@@ -29,5 +29,12 @@ namespace Datos
 
             return ds.ObtenerTabla("Turnos", consulta);
         }
+
+        public DataTable getHorasOcupadas(string legajo, DateTime fecha)
+        {
+            string consulta = "SELECT Hora FROM Turnos WHERE Activo = 1 AND Legajo = '"
+                + legajo.Replace("'", "''") + "' AND Fecha = '" + fecha.ToString("yyyy-MM-dd") + "'";
+            return ds.ObtenerTabla("Turnos", consulta);
+        }
     }
 }

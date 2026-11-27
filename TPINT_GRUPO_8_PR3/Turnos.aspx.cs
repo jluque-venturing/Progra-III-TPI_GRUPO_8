@@ -85,7 +85,14 @@ namespace TPINT_GRUPO_8_PR3
 
         protected void txtFecha_TextChanged(object sender, EventArgs e)
         {
-            ValidarFecha();
+            ddlHorario.Items.Clear();
+            ddlHorario.Items.Add(new ListItem("-- Seleccionar --", "0"));
+
+            if (!ValidarFecha()) return;
+
+            NegocioMedico negocioMedico = new NegocioMedico();
+            foreach (string hora in negocioMedico.horariosDisponibles(ddlMedico.SelectedValue, DateTime.Parse(txtFecha.Text)))
+                ddlHorario.Items.Add(new ListItem(hora, hora));
         }
 
         private bool ValidarFecha()

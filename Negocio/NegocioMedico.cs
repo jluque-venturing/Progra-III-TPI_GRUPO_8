@@ -1,5 +1,6 @@
 ﻿using Datos;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Negocio
@@ -33,6 +34,25 @@ namespace Negocio
         public bool atiendeElDia(string legajo, DateTime fecha)
         {
             return dao.atiendeElDia(legajo, nombreDelDia(fecha));
+        }
+        public List<string> horariosDisponibles(string legajo, DateTime fecha)
+        {
+            List<string> libres = new List<string>();
+            DataTable horario = dao.getHorarioDelDia(legajo, nombreDelDia(fecha));
+            if (horario.Rows.Count == 0) return libres;
+
+            List<TimeSpan> ocupadas = new List<TimeSpan>();
+            foreach (DataRow f in new DaoTurno().getHorasOcupadas(legajo, fecha).Rows)
+                ocupadas.Add((TimeSpan)f["Hora"]);
+
+            TimeSpan desde = (TimeSpan)horario.Rows[0]["HoraDesde"];
+            TimeSpan hasta = (TimeSpan)horario.Rows[0]["HoraHasta"];
+
+            for (TimeSpan h = desde; h < hasta; h = h.Add(TimeSpan.FromHours(1)))
+                if (!ocupadas.Contains(h))
+                    libres.Add(h.ToString(@"hh\:mm"));
+
+            return libres;
         }
     }
 }
