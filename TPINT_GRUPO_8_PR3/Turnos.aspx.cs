@@ -95,6 +95,34 @@ namespace TPINT_GRUPO_8_PR3
                 ddlHorario.Items.Add(new ListItem(hora, hora));
         }
 
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ViewState["IdPaciente"] = null;
+            lblPaciente.ForeColor = System.Drawing.Color.Red;
+
+            if (!Page.IsValid)
+                return;
+
+            NegocioPaciente negocioPaciente = new NegocioPaciente();
+            Paciente p = negocioPaciente.buscarPorDni(txtDNI.Text.Trim());
+
+            if (p == null)
+            {
+                lblPaciente.Text = "No existe un paciente con ese DNI";
+                return;
+            }
+
+            if (!p.getActivo())
+            {
+                lblPaciente.Text = "El paciente está dado de baja";
+                return;
+            }
+
+            ViewState["IdPaciente"] = p.getIdPaciente();
+            lblPaciente.ForeColor = System.Drawing.Color.Black;
+            lblPaciente.Text = p.getApellido() + ", " + p.getNombre();
+        }
+
         private bool ValidarFecha()
         {
             lblMensajeFecha.Text = "";

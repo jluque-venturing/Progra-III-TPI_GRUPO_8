@@ -72,6 +72,13 @@ namespace Datos
             return ds.existe(consulta);
         }
 
+        public DataTable getPacientePorDni(string dni)
+        {
+            string consulta = "SELECT IdPaciente, Nombre, Apellido, Activo FROM Pacientes WHERE Dni = '" + dni.Replace("'", "''") + "'";
+
+            return ds.ObtenerTabla("Paciente", consulta);
+        }
+
         public string generarIdPaciente()
         {
             string consulta = @"

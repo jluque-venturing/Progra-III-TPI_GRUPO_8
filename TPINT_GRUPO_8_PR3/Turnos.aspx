@@ -134,11 +134,20 @@
                 <td class="auto-style3">
                     <asp:TextBox ID="txtDNI" runat="server">
                     </asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvDNI" runat="server"
+                        ControlToValidate="txtDNI" ValidationGroup="BuscarPaciente"
+                        ErrorMessage="Ingrese un DNI" ForeColor="Red" Display="Dynamic">
+                    </asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="revDNI" runat="server"
+                        ControlToValidate="txtDNI" ValidationGroup="BuscarPaciente"
+                        ValidationExpression="^\d+$"
+                        ErrorMessage="El DNI solo puede tener números" ForeColor="Red" Display="Dynamic">
+                    </asp:RegularExpressionValidator>
                 </td>
 
                 <td>
                     <asp:Button ID="btnBuscar" runat="server"
-                        Text="Buscar" />
+                        Text="Buscar" ValidationGroup="BuscarPaciente" OnClick="btnBuscar_Click" />
                 </td>
             </tr>
 

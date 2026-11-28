@@ -34,6 +34,26 @@ namespace Negocio
             return dao.getTablaLocalidades(idProvincia);
         }
 
+        public Paciente buscarPorDni(string dni)
+        {
+            DaoPaciente dao = new DaoPaciente();
+            DataTable tabla = dao.getPacientePorDni(dni);
+
+            if (tabla.Rows.Count == 0)
+            {
+                return null;
+            }
+
+            DataRow fila = tabla.Rows[0];
+            Paciente p = new Paciente();
+            p.setIdPaciente(fila["IdPaciente"].ToString());
+            p.setDni(dni);
+            p.setNombre(fila["Nombre"].ToString());
+            p.setApellido(fila["Apellido"].ToString());
+            p.setActivo(Convert.ToBoolean(fila["Activo"]));
+            return p;
+        }
+
         public bool agregarPaciente(Paciente p)
         {
             DaoPaciente dao = new DaoPaciente();
